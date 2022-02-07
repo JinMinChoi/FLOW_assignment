@@ -18,13 +18,13 @@ public class CustomExtensionController {
     @PostMapping("/write/custom")
     public String addCustomExtension(@ModelAttribute("customExtensionAddRequest") CustomExtensionAddRequest customExtensionAddRequest) {
         customExtensionAddService.addCustomExtension(customExtensionAddRequest);
-        return "redirect:/list/custom";
+        return "redirect:/list";
     }
 
     @GetMapping("/cancel/custom/{id}")
     public String deleteCustomExtension(@PathVariable("id") Long id) {
         customExtensionDeleteService.deleteCustomExtension(id);
-        return "redirect:/list/custom";
+        return "redirect:/list";
     }
 
 }

@@ -10,10 +10,10 @@ public interface ExtensionRepository extends JpaRepository<Extension, Long> {
 
     Optional<Extension> findByName(String name);
 
-    List<Extension> findAllByCustom(boolean isCustom);
+    List<Extension> findAllByCustom(boolean custom);
+
+    List<Extension> findAllByCustomAndChecked(boolean custom, boolean checked);
 
     long countAllByCustom(boolean custom);
-
-    //void deleteByNameAndCustom(String name, boolean isCustom);
 
 }

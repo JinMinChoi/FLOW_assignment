@@ -18,10 +18,15 @@ public class Extension {
     private String name;
 
     @Column(name = "custom")
-    private boolean custom;
+    private Boolean custom;
 
     @Column(name = "checked")
-    private boolean checked;
+    private Boolean checked;
+
+    public Extension(String name, boolean custom) {
+        this.name = name;
+        this.custom = custom;
+    }
 
     public Extension(String name, boolean custom, boolean checked) {
         this.name = name;
@@ -29,12 +34,19 @@ public class Extension {
         this.checked = checked;
     }
 
-    public Extension(String name, boolean custom) {
-        this.name = name;
-        this.custom = custom;
-    }
-
     public static Extension makeCustomExtension(String name, boolean custom) {
         return new Extension(name, custom);
+    }
+
+    public static Extension saveFixedExtension(String name, boolean custom, boolean checked) {
+        return new Extension(name, custom, checked);
+    }
+
+    public void convertCheckStatus() {
+        if (checked) {
+            checked = false;
+        } else {
+            checked = true;
+        }
     }
 }

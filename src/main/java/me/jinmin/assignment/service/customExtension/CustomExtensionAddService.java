@@ -2,7 +2,7 @@ package me.jinmin.assignment.service.customExtension;
 
 import lombok.RequiredArgsConstructor;
 import me.jinmin.assignment.controller.dto.CustomExtensionAddRequest;
-import me.jinmin.assignment.exception.AlreadyExistFixedExtensionException;
+import me.jinmin.assignment.exception.AlreadyExistExtensionException;
 import me.jinmin.assignment.model.Extension;
 import me.jinmin.assignment.repository.ExtensionRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class CustomExtensionAddService {
 
     private void checkAlreadyExistFixedExtension(String name) {
         if (extensionRepository.findByName(name).isPresent()) {
-            throw new AlreadyExistFixedExtensionException(String.format("%s is already saved custom extension", name));
+            throw new AlreadyExistExtensionException(String.format("%s is already saved custom extension", name));
         }
     }
 }
