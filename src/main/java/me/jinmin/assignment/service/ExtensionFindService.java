@@ -28,8 +28,8 @@ public class ExtensionFindService {
     }
 
     @Transactional(readOnly = true)
-    public List<Extension> findByIsCustom() {
-        return extensionRepository.findAllByCustom(true);
+    public List<Extension> findByIsCustom(boolean custom) {
+        return extensionRepository.findAllByCustom(custom);
     }
 
     @Transactional

@@ -17,9 +17,8 @@ public class CustomExtensionAddService {
     @Transactional
     public void addCustomExtension(CustomExtensionAddRequest customExtensionAddRequest) {
         checkAlreadyExistFixedExtension(customExtensionAddRequest.getName());
-        Extension extension = Extension.makeExtension(
+        Extension extension = Extension.makeCustomExtension(
                 customExtensionAddRequest.getName(),
-                true,
                 true);
         extensionRepository.save(extension);
     }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Extension</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1> 파일 확장자 차단 </h1>
+<br>
+<h2> 파일 확장자에 따라 특정 형식의 파일을 첨부하거나 전송하지 못하도록 제한 </h2>
+<br>
+<form role="form" th:action="@{'/check/fixed'}" th:method="post">
+    <div class="form-group">
+        <label th:for="fixed"> 고정 확장자</label>
+        <input type="checkbox" id="bat" name="fixedExtensions" value="true"> bat
+        <input type="checkbox" id="cmd" name="fixedExtensions" value="cmd"> cmd
+        <input type="checkbox" id="com" name="fixedExtensions" value="com"> com
+        <input type="checkbox" id="cpl" name="fixedExtensions" value="cpl"> cpl
+        <input type="checkbox" id="exe" name="fixedExtensions" value="exe"> exe
+        <input type="checkbox" id="scr" name="fixedExtensions" value="scr"> scr
+        <input type="checkbox" id="js" name="fixedExtensions" value="js"> js
+        <button type="submit"> 체크 상태 저장</button>
+    </div>
+</form>
+<form role="form" th:action="@{'/write/custom'}" th:object="${customExtensionAddRequest}" method="post">
+    <div class="form-group">
+        <label th:for="custom"> 커스텀 확장자</label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="확장자 입력">
+        <button type="submit">+추가</button>
+    </div>
+</form>-
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td th:text="${customExtensionCurCount} + ' / 200'"></td>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customExtension : ${customExtensions}">
+                <td>
+                    <a th:href="@{'/cancel/custom/' + ${customExtension.getId()}}" th:text="${customExtension.getName()} + ' X'" th:method="get"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

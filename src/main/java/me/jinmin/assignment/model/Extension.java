@@ -29,7 +29,12 @@ public class Extension {
         this.checked = checked;
     }
 
-    public static Extension makeExtension(String name, boolean is_custom, boolean is_checked) {
-        return new Extension(name, is_custom, is_checked);
+    public Extension(String name, boolean custom) {
+        this.name = name;
+        this.custom = custom;
+    }
+
+    public static Extension makeCustomExtension(String name, boolean custom) {
+        return new Extension(name, custom);
     }
 }
