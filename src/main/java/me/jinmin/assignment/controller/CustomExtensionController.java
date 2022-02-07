@@ -2,6 +2,7 @@ package me.jinmin.assignment.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.jinmin.assignment.controller.dto.CustomExtensionAddRequest;
+import me.jinmin.assignment.exception.OverCustomExtensionCountException;
 import me.jinmin.assignment.model.Extension;
 import me.jinmin.assignment.service.ExtensionFindService;
 import me.jinmin.assignment.service.customExtension.CustomExtensionAddService;
@@ -24,19 +25,31 @@ public class CustomExtensionController {
     @GetMapping("/list/custom")
     public String findCustomExtension(Model model) {
         List<Extension> customExtensions = extensionFindService.findByIsCustom();
+        CustomExtensionAddRequest customExtensionAddRequest = new CustomExtensionAddRequest();
+
+        long customExtensionCurCount = extensionFindService.countCustom();
+        checkOverCustomExtensionCount(customExtensionCurCount);
         model.addAttribute("customExtensions", customExtensions);
+        model.addAttribute("customExtensionAddRequest", customExtensionAddRequest);
+        model.addAttribute("customExtensionCurCount", customExtensionCurCount);
         return "mainView";
     }
 
     @PostMapping("/write/custom")
-    public String addCustomExtension(@ModelAttribute("extensionAddRequest") CustomExtensionAddRequest customExtensionAddRequest) {
+    public String addCustomExtension(@ModelAttribute("customExtensionAddRequest") CustomExtensionAddRequest customExtensionAddRequest) {
         customExtensionAddService.addCustomExtension(customExtensionAddRequest);
-        return "mainView";
+        return "redirect:/list/custom";
     }
 
-    @DeleteMapping("/cancel/custom/{id}")
+    @GetMapping("/cancel/custom/{id}")
     public String deleteCustomExtension(@PathVariable("id") Long id) {
         customExtensionDeleteService.deleteCustomExtension(id);
-        return "mainView";
+        return "redirect:/list/custom";
+    }
+
+    private void checkOverCustomExtensionCount(long customExtensionCurCount) {
+        if (customExtensionCurCount > 200) {
+            throw new OverCustomExtensionCountException("custom extensions count is over 200");
+        }
     }
 }

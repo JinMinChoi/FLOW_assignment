@@ -29,6 +29,11 @@ public class ExtensionFindService {
 
     @Transactional(readOnly = true)
     public List<Extension> findByIsCustom() {
-        return extensionRepository.findByIsCustom(true);
+        return extensionRepository.findAllByCustom(true);
+    }
+
+    @Transactional
+    public long countCustom(){
+        return extensionRepository.countAllByCustom(true);
     }
 }

@@ -17,16 +17,16 @@ public class Extension {
     @Column(name = "extension_name")
     private String name;
 
-    @Column(name = "isCustom")
-    private boolean is_custom;
+    @Column(name = "custom")
+    private boolean custom;
 
-    @Column(name = "isChecked")
-    private boolean is_checked;
+    @Column(name = "checked")
+    private boolean checked;
 
-    public Extension(String name, boolean is_custom, boolean is_checked) {
+    public Extension(String name, boolean custom, boolean checked) {
         this.name = name;
-        this.is_custom = is_custom;
-        this.is_checked = is_checked;
+        this.custom = custom;
+        this.checked = checked;
     }
 
     public static Extension makeExtension(String name, boolean is_custom, boolean is_checked) {
